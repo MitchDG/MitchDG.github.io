@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang=en-AU>
 <head>
+   <title>Where did my senate vote go?</title>
 <meta charset=UTF-8>
 <!--script src="./d3/d3.js"></script-->
 <script src = "https://d3js.org/d3.v4.min.js"></script>
@@ -35,7 +36,7 @@
 <br> Furthermore, the 2016 Federal election was a double dissolution election, which means 12 candidates were elected in each state, and 2 in each territory.
 <br> The 2019 federal election will (probably) be a normal half senate election, which means only 6 candidates will be elected in each state, and 1 in each territory.
 <br>
-<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it was cast in the 2016 Federal election.
+<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it were cast in the 2016 Federal election.
 <!-- I am from Queensland, where our state parliament is unicameral (we don't have a state senate). If this site is popular, I might consider adapting it to state senates also. -->
 </p>
 </form>
@@ -50,15 +51,17 @@ function sortNumber(a,b) {
 ### Ballot Display ###
 ####################*/
 function DisplayBallot() {
-document.getElementById("question").innerHTML = "";
+var statedict = {"ACT":"Australian Capital Territory", "NSW":"New South Wales", "NT":"Northern Territory", "QLD":"Queensland", "SA":"South Australia", "TAS":"Tasmania", "VIC":"Victoria", "WA":"Western Australia"};
+document.getElementById("question").innerHTML = "The ballot for the " + statedict[state] + " 2016 Federal Election. <br><font color=\"blue\">Candidates in blue</font> were elected in 2016 and are still in parliament, <font color=\"red\">candidates in red</font> are no longer in parliament, and <font color = \"green\">candidates in green</font> were not elected in 2016, but were subsequently appointed to parliament. <br>";
 document.getElementById("demo").innerHTML = "<br>";
 d3.csv("./data/" + state + ".csv", function(data) {
 var NoCands = data.length;
-var ticket = new Array();
-var position = new Array();
-var surname = new Array();
-var forename = new Array();
-var party = new Array();
+var ticket;
+var position;
+var surname;
+var forename;
+var party;
+var fate;
 
 var atlticket  = "<tr>";
 var atlbox = "<tr>"
@@ -74,7 +77,7 @@ for (var i = 0; i < defaultmaxposition; i++) {
     btltable[i][j] = "<td></td>";
   }
 }
-
+var coldict = {"Transfer":"black", "Bag":"black", "Elected":"blue", "Final":"blue", "Transfer_Appointed":"green", "Bag_Appointed":"green", "Elected_Left":"red", "Final_Left":"red"};
 var realmaxposition = 0;
 var groupj = -1;
 for (var i = 0; i < NoCands; i++) {
@@ -83,6 +86,7 @@ for (var i = 0; i < NoCands; i++) {
   surname = data[i]["surname"];
   forename = data[i]["ballot_given_nm"];
   party = data[i]["party_ballot_nm"];
+  fate = data[i]["fate"];
 
   if (position > realmaxposition) {
     realmaxposition = Number(position);
@@ -110,8 +114,8 @@ for (var i = 0; i < NoCands; i++) {
       btlparty += "<td style=\"width:2000px; padding:0px 0px 0px 10px\" > <b><font size=\"3\"> <div> Ungrouped </div> </td>";
     }
   }
-  btltable[position - 1][groupj] += " <table><tr><td rowspan=\"3\"> <input name=\"btl" + position + ticket + "\" type=\"number\" min=\"1\" max=\"" + NoCands + "\" step=\"1\"> </td>\
-  <td> <b><font size=\"2\">" + surname + "</b></td></tr> <tr><td> " + forename + "</td></tr> <tr><td> " + party + "</font></td></tr></table></td>";
+  btltable[position - 1][groupj] += "<font color=" + coldict[fate] + "><table><tr><td rowspan=\"3\"> <input name=\"btl" + position + ticket + "\" type=\"number\" min=\"1\" max=\"" + NoCands + "\" step=\"1\"> </td>\
+  <td> <b><font size=\"2\">" + surname + "</b></td></tr> <tr><td> " + forename + "</td></tr> <tr><td> " + party + "</font></td></tr></table></font></td>";
 }
 
 var tablestring = "<table style='width:2000px' table-layout:\"fixed\">" + atlticket + "</tr>" + atlbox + "</tr>" + atlparty + "</tr>" + "</tr>" + btlticket + "</tr>" + btlparty + "</tr>";
@@ -146,6 +150,7 @@ var party = new Array();
 var resultorder = new Array();
 var fate = new Array();
 var transfervalue = new Array();
+var notes = new Array();
 for (var i = 0; i < NoCands; i++) {
   ticket[i] = data[i]["ticket"];
   position[i] = Number(data[i]["ballot_position"]);
@@ -155,6 +160,7 @@ for (var i = 0; i < NoCands; i++) {
   resultorder[i] = Number(data[i]["elimination_order"]);
   fate[i] = data[i]["fate"];
   transfervalue[i] = Number(data[i]["transfer_factor"]);
+  notes[i] = data[i]["notes"];
 }
 
 
@@ -185,20 +191,32 @@ for (var i = 0; i < NoCands; i++) {
   var btly = Number(x.elements["btl"+position[i]+ticket[i]].value);
   btlVote[i] = btly;
   if (btly > 0) {
-      if (btlOnly.includes(btly)) {
-        RepeatError = true;
-        document.getElementById("demo").innerHTML+= ErrorMessage + "You have given multiple candidates preference " + btly +" below the line. <br>";}
-      btlOnly[btlj] = btly;
-      btlj += 1;
+    if (btlOnly.includes(btly) && !RepeatError) {
+      RepeatError = true;
+      document.getElementById("demo").innerHTML+= ErrorMessage + "You have given multiple candidates preference " + btly +" below the line. Two candidates with this preference are: <br>";
+      for (var k = 0; k <= i; k++) {
+        if (btlVote[k] == btly){
+          document.getElementById("demo").innerHTML+= forename[k] + " " + surname[k] + " of the <b>" + party[k] + "</b> (group " + ticket[k] + ") <br>";
+        }
+      }
     }
+    btlOnly[btlj] = btly;
+    btlj += 1;
+  }
 
   if (position[i] == 1 && ticket[i] != "UG" && ticket[i] != "UG1") {
     var atly = Number(x.elements["atl"+ticket[i]].value);
     atlVote[j] = atly;
     if (atly > 0) {
-      if (atlOnly.includes(atly)) {
+      if (atlOnly.includes(atly) && !RepeatError) {
         RepeatError = true;
-        document.getElementById("demo").innerHTML+= ErrorMessage + "You have given multiple parties preference " + atly +" above the line. <br>";}
+        document.getElementById("demo").innerHTML+= ErrorMessage + "You have given multiple parties preference " + atly +" above the line. Two parties with this preference are: <br>";
+        for (var k = 0; k <= i; k++) {
+          if ((position[k] == 1) && Number(x.elements["atl"+ticket[k]].value) == atly){
+            document.getElementById("demo").innerHTML+= "The <b>" + party[k] + "</b> group " + ticket[k] + "<br>";
+          }
+        }
+      }
       atlOnly[atlj] = atly;
       atlj += 1;
     }
@@ -221,12 +239,24 @@ var btlNoPrefs = btlOnly.length;
 // LineError, toomanyError, MissingError, nodataerror
 if (atlNoPrefs > 0 && btlNoPrefs > 0) {
   BothLineError = true;
-  document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated preferences both above and below the line. <br>";
+  document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated preferences both above and below the line. Your above the line preferences are: <br>";
+
+  for (var i = 0; i < NoCands; i++) {
+    if ((sudoVote[i] % 12) == 1){
+      document.getElementById("demo").innerHTML+= "The <b>" + party[i] + "</b> group " + ticket[i] + "<br>";
+    }
+  }
+  document.getElementById("demo").innerHTML+= " <br> Your below the line preferences are: <br>"
+  for (var i = 0; i < NoCands; i++) {
+    if (btlVote[i] > 0){
+      document.getElementById("demo").innerHTML+= forename[i] + " " + surname[i] + " of the <b>" + party[i] + "</b> (group " + ticket[i] + ") <br>";
+    }
+  }
 
 } else if (atlNoPrefs > 0) {
   if (atlMaxPref > atlVote.length) {
+    document.getElementById("demo").innerHTML+= ErrorMessage + "Your highest above the line preference, " + atlMaxPref +", (given to the <b>" + party[sudoVote.indexOf(Math.max.apply(null, sudoVote))] + "</b> group " + ticket[sudoVote.indexOf(Math.max.apply(null, sudoVote))] + ") is higher than the number of grouped parties, which is only " + atlVote.length + ". <br>";
     TooManyError = true;
-    document.getElementById("demo").innerHTML+= ErrorMessage + "Your highest above the line preference, " + atlMaxPref +", is higher than the number of grouped parties, which is only " + atlVote.length + ". <br>";
   } else if (atlMaxPref < 6) {
     NotEnoughError = true;
     document.getElementById("demo").innerHTML+= ErrorMessage + "You have not indicated enough preferences. You need to give at least 6 above the line preferences, but the highest preference you have given is " + atlMaxPref + ". <br>";
@@ -234,7 +264,7 @@ if (atlNoPrefs > 0 && btlNoPrefs > 0) {
     for (var j = 1; j <= atlNoPrefs; j++) {
       if (!(atlOnly.includes(j)) && !MissingError && !TooManyError && !RepeatError && !BothLineError && !NotEnoughError) {
         MissingError = true;
-        document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated an above the line preference up to " + atlMaxPref + ", but you have missed lower preferences, such as " + j + ". <br>"
+        document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated an above the line preference up to " + atlMaxPref + " (given to the <b>" + party[sudoVote.indexOf(Math.max.apply(null, sudoVote))] + "</b> group " + ticket[sudoVote.indexOf(Math.max.apply(null, sudoVote))] + "), but you have missed lower preferences, such as " + j + ". <br>";
       }
     }
   }
@@ -252,7 +282,7 @@ if (atlNoPrefs > 0 && btlNoPrefs > 0) {
 } else if (btlNoPrefs > 0) {
   if (btlMaxPref > NoCands) {
     TooManyError = true;
-    document.getElementById("demo").innerHTML+= ErrorMessage + "Your highest below the line preference " + btlMaxPref +" is higher than the number of candidates, which is only " + NoCands + ". <br>";
+    document.getElementById("demo").innerHTML+= ErrorMessage + "Your highest below the line preference " + btlMaxPref + ", given to " + forename[btlVote.indexOf(btlMaxPref)] + " " + surname[btlVote.indexOf(btlMaxPref)] + " of the <b>" + party[btlVote.indexOf(btlMaxPref)] + "</b> (group " + ticket[btlVote.indexOf(btlMaxPref)] + ") is higher than the number of candidates, which is only " + NoCands + ". <br>";
   } else if (btlMaxPref < 12) {
     NotEnoughError = true;
     document.getElementById("demo").innerHTML+= ErrorMessage + "You have not indicated enough preferences. You need to give at least 12 below the line preferences, but the highest preference you have given is " + btlMaxPref + ". <br>";
@@ -260,7 +290,7 @@ if (atlNoPrefs > 0 && btlNoPrefs > 0) {
     for (var j = 1; j <= btlNoPrefs; j++) {
       if (!(btlOnly.includes(j)) && !MissingError && !TooManyError && !RepeatError && !BothLineError && !NotEnoughError) {
         MissingError = true;
-        document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated a below the line preference up to " + btlMaxPref + ", but you have missed lower preferences, such as " + j + ". <br>"
+        document.getElementById("demo").innerHTML+= ErrorMessage + "You have indicated a below the line preference up to " + btlMaxPref + ", given to " + forename[btlVote.indexOf(btlMaxPref)] + " " + surname[btlVote.indexOf(btlMaxPref)] + " of the <b>" + party[btlVote.indexOf(btlMaxPref)] + "</b> (group " + ticket[btlVote.indexOf(btlMaxPref)] + "), but you have missed lower preferences, such as " + j + ". <br>"
       }
     }
   }
@@ -298,25 +328,30 @@ while (votelive && prefind <= MaxPref) {
     }
     var voteorder = candorder;
 
-    if (fate[candind] == "Elected") {
+    if (fate[candind] == "Elected" || fate[candind] == "Elected_Left") {
       electedvalue = Math.round(100 * votevalue * (1 - transfervalue[candind])) / 100;
       votevalue = Math.round(100 * votevalue * transfervalue[candind]) / 100;
-      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were elected! <br><br> This candidate was elected with more than the number of votes that they needed to win a seat, so their extra votes transferred to their next preference. However, it would be unfair to randomly choose which of these excess votes are transferred, and which stay with this candidate. So ALL the votes are transferred, but as they have already elected a candidate, they are no longer worth one vote, but are reduced in value, so that the total value of the transferred votes is equal to the number of excess votes this candidate received. Hence, " + electedvalue + "% of your vote elected " + party[candind] + " and " + votevalue + "% flowed to your next preference. <br><br>";
+      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were elected! <br><br> This candidate was elected with more than the number of votes that they needed to win a seat, so their extra votes transferred to their next preference. However, it would be unfair to randomly choose which of these excess votes are transferred, and which stay with this candidate. So ALL the votes are transferred, but as they have already elected a candidate, they are no longer worth one vote, but are reduced in value, so that the total value of the transferred votes is equal to the number of excess votes this candidate received. Hence, " + electedvalue + "% of your vote elected " + party[candind] + " and " + votevalue + "% flowed to your next preference. <br>";
 
-    } else if (fate[candind] == "Final") {
-      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were elected! <br><br> This was the final candidate elected so no more preferences were transfered. <br>";
+    } else if (fate[candind] == "Final" || fate[candind] == "Final_Left") {
+      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were elected! <br><br> This was the final candidate elected so no more preferences were transfered.";
       votelive = false;
 
-    } else if (fate[candind] == "Bag") {
-      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. All the senate seats were filled before this candidate was excluded, so your vote extinguished here. <br>";
+    } else if (fate[candind] == "Bag" || fate[candind] == "Bag_Appointed") {
+      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. All the senate seats were filled before this candidate was excluded, so your vote extinguished here.";
       votelive = false;
 
-    } else if (fate[candind] == "Transfer") {
-      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were not elected, but there are still vacant senate seats, so your vote will be transfered to your next prefence. <br>";
+    } else if (fate[candind] == "Transfer" || fate[candind] == "Transfer_Appointed") {
+      document.getElementById("demo").innerHTML+= forename[candind] + " " + surname[candind] + " of the <b>" + party[candind] + "</b>. They were not elected, but there are still vacant senate seats, so your vote will be transfered to your next prefence.";
 
     } else {
       document.getElementById("demo").innerHTML+= "Error! Candind: " + candind + "<br>";
       console.log(fate[candind])
+    }
+    if (notes[candind] != "") {
+      document.getElementById("demo").innerHTML+= "<br><i> Note: " + notes[candind] + "</i><br><br>";
+    }  else {
+      document.getElementById("demo").innerHTML+= "<br>"
     }
   }
 
@@ -324,7 +359,7 @@ while (votelive && prefind <= MaxPref) {
 }
 //console.log("preference index: ", prefind, candind, " candidate order ", candorder, fate[candind])
 if (votelive) {
-  document.getElementById("demo").innerHTML+= "However, the rest of your preferences have either been elected or excluded, so your vote was exhausted. <br>";
+  document.getElementById("demo").innerHTML+= "However, the rest of your preferences have either been elected or excluded, so your vote exhausted. <br>";
 }
 
 }
@@ -335,6 +370,7 @@ if (votelive) {
 
 <div id=copyright> <!--<aMitchell Gooding</a>.-->
 Commonweath electoral data is copyright © Australian Electoral Commission (AEC) and licensed under a Creative Commons Attribution 4.0 International Licence (CC BY 4.0). <!--and reproduced with permission.-->
+<br> However, any mistakes in this program are my own; the AEC was not involved in producing this tool. Please <a href="mailto:mitchell.gooding@uqconnect.edu.au?Subject=Preference%20website">let me know</a> if you find any errors.
 </div>
 </body>
 </html>

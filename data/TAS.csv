@@ -1,0 +1,59 @@
+ticket,ballot_position,surname,ballot_given_nm,party_ballot_nm,transfer_factor,elimination_order,fate
+A,1,MADDEN,Peter,Family First,1,48,Transfer
+A,2,ROBERTS,Andrew,Family First,1,27,Transfer
+B,1,URQUHART,Anne,Australian Labor Party,0.702952260591362,0,Elected
+B,2,POLLEY,Helen,Australian Labor Party,0.414034094126975,2,Elected
+B,3,BROWN,Carol,Australian Labor Party,0.126231046686491,4,Elected
+B,4,BILYK,Catryna,Australian Labor Party,1,51,Transfer
+B,5,SHORT,John,Australian Labor Party,1,34,Transfer
+B,6,SINGH,Lisa,Australian Labor Party,0.00012475828083,50,Elected
+C,1,WHISH-WILSON,Peter,The Greens,0.136892946936615,0,Elected
+C,2,McKIM,Nick,The Greens,0,500,Final
+C,3,REYNOLDS,Anna,The Greens,1,36,Transfer
+D,1,NERO-NILE,Silvana,Christian Democratic Party (Fred Nile Group),1,42,Transfer
+D,2,GORA,Mishka,Christian Democratic Party (Fred Nile Group),1,23,Transfer
+E,1,HOULT,Michelle,Nick Xenophon Team,1,46,Transfer
+E,2,COHEN,Nicky,Nick Xenophon Team,1,25,Transfer
+F,1,ABETZ,Eric,Liberal,0.716640962703912,0,Elected
+F,2,PARRY,Stephen,Liberal,0.43291130798217,1,Elected
+F,3,DUNIAM,Jonathon,Liberal,0.144791502930411,3,Elected
+F,4,BUSHBY,David,Liberal,0.092331364812474,50,Elected
+F,5,COLBECK,Richard,Liberal,1,49,Transfer
+F,6,TUCKER,John,Liberal,1,32,Transfer
+G,1,MORGAN,Kevin,Palmer United Party,1,40,Transfer
+G,2,STRINGER,Justin Leigh,Palmer United Party,1,12,Transfer
+G,3,VON STIEGLITZ,Quentin,Palmer United Party,1,7,Transfer
+H,1,COLLINS,Francesca,Australian Sex Party,1,45,Transfer
+H,2,OWEN,Matt,Marijuana (HEMP) Party,1,28,Transfer
+I,1,McCULLOCH,Kate,Pauline Hanson's One Nation,0,1000,Bag
+I,2,MANZI,Natasia,Pauline Hanson's One Nation,1,15,Transfer
+J,1,CASS,Suzanne,Derryn Hinch's Justice Party,1,37,Transfer
+J,2,BAKER,Daniel,Derryn Hinch's Justice Party,1,8,Transfer
+K,1,THORNTON,Meg,Citizens Electoral Council,1,26,Transfer
+K,2,KUCINA,Steve,Citizens Electoral Council,1,5,Transfer
+L,1,MANSON,Rob,Renewable Energy Party,1,35,Transfer
+L,2,JOYCE,Sharon,Renewable Energy Party,1,17,Transfer
+M,1,LAMBIE,Jacqui,Jacqui Lambie Network,0.064002296046494,0,Elected
+M,2,MARTIN,Steve,Jacqui Lambie Network,1,44,Transfer
+M,3,WATERMAN,Rob,Jacqui Lambie Network,1,14,Transfer
+N,1,ROBINSON,Tony,Australian Liberty Alliance,1,33,Transfer
+N,2,HORWOOD,Susan,Australian Liberty Alliance,1,6,Transfer
+O,1,POULTON,Adam,VOTEFLUX.ORG | Upgrade Democracy!,1,31,Transfer
+O,2,KAYE,Max,VOTEFLUX.ORG | Upgrade Democracy!,1,11,Transfer
+P,1,ALLEN,Matthew,"Shooters, Fishers and Farmers",1,47,Transfer
+P,2,MIDSON,Ricky,"Shooters, Fishers and Farmers",1,22,Transfer
+Q,1,BEVIS,Karen,Animal Justice Party,1,43,Transfer
+Q,2,BAKER,Alison,Animal Justice Party,1,19,Transfer
+R,1,WILLINK,Hans,Science Party,1,38,Transfer
+R,2,CHOI,Jin-oh,Science Party,1,20,Transfer
+S,1,HARKINS,Kevin,Australian Recreational Fishers Party,1,41,Transfer
+S,2,EVANS,Carmen,Australian Recreational Fishers Party,1,13,Transfer
+T,1,MEAD,Clinton,Liberal Democrats,1,39,Transfer
+T,2,ALSTON,Ian,Liberal Democrats,1,9,Transfer
+U,1,O'HARA,Scott,The Arts Party,1,30,Transfer
+U,2,VOLTA,JoAnne,The Arts Party,1,21,Transfer
+UG,1,CRAWFORD,David,Antipaedophile Party,1,18,Transfer
+UG,2,MARSKELL,Kaye,Independent,1,29,Transfer
+UG,3,TEMBY,Richard,Mature Australia,1,24,Transfer
+UG,4,RUSSELL,Grant,Independent,1,16,Transfer
+UG,5,LANE,George,Independent,1,10,Transfer

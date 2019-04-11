@@ -369,13 +369,13 @@ if (atlNoPrefs > 0 && btlNoPrefs > 0 && btlMaxValidPref >= 6) {
 }
 if (!totalError) {
   if (RepeatErrorA || MissingErrorA || TooManyErrorA || RepeatErrorB || MissingErrorB || TooManyErrorB){
-    document.getElementById("output").innerHTML+= "<br><font color=\"red\"> Although there are errors in this vote, it can still be interesting to see whare the preferences would flow, up until the point where the preferences are no longer clear. The preferences shown in italics are deemed to be ambiguous, and hence will be ignored in the preference flow below.<br>";
+    document.getElementById("demo").innerHTML+= "<br><font color=\"red\"> Although there are errors in this vote, it can still be interesting to see whare the preferences would flow, up until the point where the preferences are no longer clear. The preferences shown in italics are deemed to be ambiguous, and hence will be ignored in the preference flow.<br>";
   } else if (NotEnoughErrorA || NotEnoughErrorB){
-    document.getElementById("output").innerHTML+= "<br><font color=\"red\"> Although there are not enough preferences in this vote, it can still be interesting to see whare the preferences would flow.<br>";
+    document.getElementById("demo").innerHTML+= "<br><font color=\"red\"> Although there are not enough preferences in this vote, it can still be interesting to see whare the preferences would flow.<br>";
   } else {
-    document.getElementById("output").innerHTML+= "<br><font color=\"blue\"> Your vote flows down this list of preferences, skiping candidates that have been excluded at the time the preference arrives at them. The vote is exhausted if runs out of preferences while there are still undecided senate seats.<br>";
+    document.getElementById("demo").innerHTML+= "<br><font color=\"blue\"> Your vote flows down this list of preferences, skiping candidates that have been excluded at the time the preference arrives at them. The vote is exhausted if runs out of preferences while there are still undecided senate seats.<br>";
   }
-  document.getElementById("output").innerHTML+= "<br>";
+  document.getElementById("demo").innerHTML+= "<br>";
 
   if (whichVote == "B") {
     var MaxPref = btlMaxValidPref;

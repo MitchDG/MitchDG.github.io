@@ -1,0 +1,23 @@
+ticket,ballot_position,surname,ballot_given_nm,party_ballot_nm,transfer_factor,elimination_order,fate,notes
+A,1,DONNELLY,Matt,Liberal Democrats,0,1000,Bag,
+A,2,HENNINGS,Cawley,Liberal Democrats,1,5,Transfer,
+B,1,EDWARDS,David,Secular Party of Australia,1,12,Transfer,
+B,2,MIHALJEVIC,Denis,Secular Party of Australia,1,2,Transfer,
+C,1,GALLAGHER,Katy,Australian Labor Party,0.113,0,Elected_Left,"Although elected in 2016, Katy GALLAGHER was disqualified due to foreign citizenship. She was replaced by David SIMTH."
+C,2,SMITH,David,Australian Labor Party,0,1000,Bag_Appointed,"Although not elected in 2016, David SMITH replaced Katy GALLAGER after she was disqualified due to foreign citizenship."
+D,1,O'CONNOR,Sandie,Rise Up Australia Party,1,14,Transfer,
+D,2,WYATT,Jess,Rise Up Australia Party,1,3,Transfer,
+E,1,HAYDON,John,Sustainable Australia,1,15,Transfer,
+E,2,TYE,Martin,Sustainable Australia,1,7,Transfer,
+F,1,SESELJA,Zed,Liberals,0.001,16,Final,
+F,2,HIATT,Jane,Liberals,1,13,Transfer,
+G,1,FIELD,Deborah,Animal Justice Party,0,1000,Bag,
+G,2,MONTAGNE,Jessica,Animal Justice Party,1,6,Transfer,
+H,1,HOBBS,Christina,The Greens,0,1000,Bag,
+H,2,WAREHAM,Sue,The Greens,1,10,Transfer,
+I,1,KIM,David William,Christian Democratic Party (Fred Nile Group),0,1000,Bag,
+I,2,TADROS,Elizabeth,Christian Democratic Party (Fred Nile Group),1,4,Transfer,
+J,1,BAILEY,Steven,Australian Sex Party,0,1,Transfer,
+J,2,SWAN,Robbie,Australian Sex Party,1,9,Transfer,
+UG,1,HAY,Michael Gerard,VOTEFLUX.ORG | Upgrade Democracy!,1,11,Transfer,
+UG,2,HANSON,Anthony,Mature Australia,1,8,Transfer,

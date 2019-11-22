@@ -7,7 +7,8 @@
    <script src = "https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
-<font size="5"> Where did my vote go in the 2016 federal election?</font><br>
+<font size="5"><div id="myTitle"> Where did my vote go in the Australian 2019 Federal Election?</div></font>
+
 
 <button type="button" onclick="state = 'NSW'; DisplayBallot()">NSW</button>
 <button type="button" onclick="state = 'VIC'; DisplayBallot()">Vic</button>
@@ -19,6 +20,8 @@
 <button type="button" onclick="state = 'NT'; DisplayBallot()">NT</button>
 &nbsp &nbsp &nbsp &nbsp
 <button type="button" onclick="FlowPreferences()">VOTE!</button>
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+<button onclick="myFunction()"><div id="myYearButton">Switch to 2016</div></button>
 
 <style type="text/css">input[type="number"] {width:40px;}</style>
 
@@ -33,17 +36,14 @@
   <tr><td><p id="demo"></p></td><td><p id="output"></p></td></tr></table>
 
 <form id="BALLOT">
-<p id="question"> The way that preferences flow in the Australian senate is confusing. This tool shows you where your vote would have flowed in the 2016 senate election.
+<p id="question"> The way that preferences flow in the Australian senate can be confusing. This tool shows you where your vote would have flowed in the 2019 (or 2016) senate election.
 <br>
-<br> <b> THIS TOOL SHOULD NOT BE USED TO PREDICT WHERE PREFERENCES WILL FLOW IN THE 2019 FEDERAL ELECTION! </b>
+<br> <b> THIS TOOL SHOULD NOT BE USED TO PREDICT WHERE PREFERENCES WILL FLOW IN FUTURE FEDERAL ELECTIONS! </b>
 <br>
-<br> Where a vote flows depends on all the other votes cast in that election, so it is imposible to tell exactly where a vote in the 2019 election will end up before the 2019 votes are counted.
+<br> Where a vote flows depends on all the other votes cast in that election, so it is imposible to tell exactly where a vote in a future election will end up before the votes are counted.
 <br> The best way to ensure your vote goes where you want it to is to make sure you indicate those preferences on your ballot, either above or below the line. By leaving boxes empty, you are effectively ranking the unnumbered parties equal last.
 <br>
-<br> Furthermore, the 2016 Federal election was a double dissolution election, which means 12 candidates were elected in each state, and 2 in each territory.
-<br> The 2019 federal election will (probably) be a normal half senate election, which means only 6 candidates will be elected in each state, and 1 in each territory.
-<br>
-<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it were cast in the 2016 Federal election.
+<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it were cast in the 2019 (or 2016) Federal election.
 <br>
 <br> To be clear, you don't have to remember your vote from last election in order for this tool to be useful. the idea is to enter a vote that you might have made, and see how things would have changed if you switched some preferences, or added some more.
 <!-- I am from Queensland, where our state parliament is unicameral (we don't have a state senate). If this site is popular, I might consider adapting it to state senates also. -->
@@ -56,15 +56,44 @@ function sortNumber(a,b) {
   return a - b;
 }
 
+
+function myFunction() {
+  var x = document.getElementById("myYearButton");
+  var y = document.getElementById("myTitle");
+  if (x.innerHTML === "Switch to 2016") {
+    x.innerHTML = "Switch to 2019";
+    y.innerHTML = "Where did my vote go in the Australian 2016 Federal Election?";
+  } else {
+    x.innerHTML = "Switch to 2016";
+    y.innerHTML = "Where did my vote go in the Australian 2019 Federal Election?";
+  }
+}
+
 /*####################
 ### Ballot Display ###
 ####################*/
 
 function DisplayBallot() {
   var statedict = {"ACT":"Australian Capital Territory", "NSW":"New South Wales", "NT":"Northern Territory", "QLD":"Queensland", "SA":"South Australia", "TAS":"Tasmania", "VIC":"Victoria", "WA":"Western Australia"};
-  document.getElementById("question").innerHTML = "The ballot for the " + statedict[state] + " 2016 Federal Election. <br><font color=\"blue\">Candidates in blue</font> were elected in 2016 and are still in parliament, <font color=\"red\">candidates in red</font> are no longer in parliament, and <font color = \"green\">candidates in green</font> were not elected in 2016, but were subsequently appointed to parliament. <br>";
+  var yearButton = document.getElementById("myYearButton");
+  if (yearButton.innerHTML === "Switch to 2016") {
+    var year = "2019";
+    var defaultmaxposition = 6;
+
+  } else {
+    var year = "2016";
+    var defaultmaxposition = 12;
+  }
+
+
+  document.getElementById("question").innerHTML = "The ballot for the " + statedict[state] + " " + year + " Federal Election. <br><font color=\"blue\">Candidates in blue</font> were elected in " + year;
+  if (year == "2016") {
+    document.getElementById("question").innerHTML += ", <font color=\"red\">candidates in red</font> were elected but did not finish their term, and <font color = \"green\">candidates in green</font> were not elected in 2016, but were subsequently appointed to parliament before the 2019 election. <br> Also note that the 2016 Federal election was a double dissolution election, which means 12 candidates were elected in each state, and 2 in each territory.";
+  } else {
+    document.getElementById("question").innerHTML += " and are still in parliament. <br> The 2019 federal election was a normal half senate election, which means 6 candidates were elected in each state, and 2 in each territory.";
+  }
   document.getElementById("demo").innerHTML = "<br>";
-  d3.csv("./data/" + state + ".csv", function(data) {
+  d3.csv("./data/" + year + "/" + state + ".csv", function(data) {
   var NoCands = data.length;
   var ticket;
   var position;
@@ -80,7 +109,6 @@ function DisplayBallot() {
   var btlparty = "<tr>"
 
   var btltable = new Array();
-  var defaultmaxposition = 12;
   for (var i = 0; i < defaultmaxposition; i++) {
     btltable[i] = new Array();
     for (var j = 0; j < NoCands; j++) {
@@ -105,7 +133,7 @@ function DisplayBallot() {
       groupj += 1;
     }
 
-    if (ticket != "UG" && ticket != "UG1"){
+    if (ticket != "UG" && ticket != "UG1" && ticket != "UG2"){
       btltable[position-1][groupj] = "<td style=\"border-right: thin solid\">";
       if (position == 1) {
         atlticket += "<td style=\"border-right: thin solid; padding:0px 0px 0px 10px \">" + ticket + "</td>";
@@ -143,11 +171,18 @@ function DisplayBallot() {
 
 function FlowPreferences() {
 console.log("***");
+var yearButton = document.getElementById("myYearButton");
+if (yearButton.innerHTML === "Switch to 2016") {
+  var year = "2019";
+} else {
+  var year = "2016";
+}
+
 document.getElementById("demo").innerHTML="";
 document.getElementById("output").innerHTML="";
 document.getElementById("datahead").innerHTML="Summary of the vote entered:";
 document.getElementById("outputhead").innerHTML="Preference flows:";
-d3.csv("./data/" + state + ".csv", function(data) {
+d3.csv("./data/" + year + "/" + state + ".csv", function(data) {
 
 /*###################
 ### Read csv data ###
@@ -196,7 +231,7 @@ for (var i = 0; i < NoCands; i++) {
   if (btly > 0) {btlNoPrefs += 1;}
   if (btly > btlMaxPref) {btlMaxPref = btly}
 
-  if (position[i] == 1 && ticket[i] != "UG" && ticket[i] != "UG1") {
+  if (position[i] == 1 && ticket[i] != "UG" && ticket[i] != "UG1" && ticket[i] != "UG2") {
     var atly = Number(x.elements["atl"+ticket[i]].value);
     atlVote[i] = atly;
     if (atly > 0) {atlNoPrefs += 1;}

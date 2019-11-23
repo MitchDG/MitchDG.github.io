@@ -1,7 +1,7 @@
 ticket,ballot_position,surname,ballot_given_nm,party_ballot_nm,transfer_factor,elimination_order,fate,notes
 A,1,PATERSON,James,Liberal,0.59898764850099,1,Elected,
 A,2,HUME,Jane,Liberal,0.197646138459694,2,Elected,
-A,3,VAN,David,Liberal,0,500,Elected,
+A,3,VAN,David,Liberal,0,500,Final,
 A,4,RANK,Anita,The Nationals,1,230,Transfer,
 A,5,HOPPITT,Kyle,Liberal,1,165,Transfer,
 A,6,MULCAHY,Julian,Liberal,1,200,Transfer,

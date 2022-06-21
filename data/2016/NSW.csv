@@ -12,12 +12,12 @@ D,2,KENNARD,Sam,Liberal Democrats,1,89,Transfer,
 E,1,LOPEZ,Steven,VOTEFLUX.ORG | Upgrade Democracy!,1,132,Transfer,
 E,2,SPATARO,Nathan,VOTEFLUX.ORG | Upgrade Democracy!,1,69,Transfer,
 F,1,PAYNE,Marise,Liberals,0.750502527075812,0,Elected,
-F,2,SINODINOS,Arthur,Liberals,0.563077621701705,1,Elected,
+F,2,SINODINOS,Arthur,Liberals,0.563077621701705,1,Elected_Left,Arthur SINODINOS resigned from the Senate on 11 November 2019 to become Australian Ambassador to the United States. Former Liberal Senator Jim Molan was appointed to fill the vacancy on 14 November 2019.
 F,3,NASH,Fiona,The Nationals,0.346385812848783,3,Elected_Left,"Although elected in 2016, Fiona NASH was disqualified due to foreign citizenship. She was replaced by Jim MOLAN."
 F,4,FIERRAVANTI-WELLS,Concetta,Liberals,0.128320250580164,5,Elected,
 F,5,WILLIAMS,John,The Nationals,0.039239315582566,155,Elected,
 F,6,HUGHES,Hollie,Liberals,1,119,Transfer,"Although not elected in 2016, Hollie HUGHES was considered as a replacement for Fiona NASH after she was disqualified due to foreign citizenship. However, she too was found to be ineligible for the senate seat."
-F,7,MOLAN,Jim,Liberals,1,133,Transfer_Appointed,"Although not elected in 2016, Jim MOLAN replaced Fiona NASH after she was disqualified due to foreign citizenship."
+F,7,MOLAN,Jim,Liberals,1,133,Transfer_Appointed,"Although not elected in 2016, Jim MOLAN replaced Fiona NASH after she was disqualified due to foreign citizenship. Jim MOLAN failed to be reelected in 2019, however, he was appointed to replace Arthur SINODINOS when he resigned in 2019."
 F,8,FANG,Wes,The Nationals,1,101,Transfer,
 F,9,OK,Sang,Liberals,1,97,Transfer,
 F,10,RICHARDS,Sarah,Liberals,1,106,Transfer,
@@ -41,7 +41,7 @@ L,3,LEROY-DYER,Sharlene,Socialist Alliance,1,23,Transfer,
 L,4,BYRNES,Howard,Socialist Alliance,1,12,Transfer,
 M,1,TUCKER,Brian Malcolm,Rise Up Australia Party,1,130,Transfer,
 M,2,NICHOLS,Maree,Rise Up Australia Party,1,31,Transfer,
-N,1,DASTYARI,Sam,Australian Labor Party,0.781792257014235,0,Elected_Left,"Although elected in 2016, Sam DASTYARI resigned from Parliament. He was replaced by Kristina KENEALLY."
+N,1,DASTYARI,Sam,Australian Labor Party,0.781792257014235,0,Elected_Left,"Although elected in 2016, Sam DASTYARI resigned from Parliament. He was replaced by Kristina KENEALLY. Kristina KENEALLY resigned on 13 April 2022 to contest the lower house seat of Fowler. A replacement was not appointed to fill the vacancy as this seat was up for election and would expire on 30 June 2022."
 N,2,McALLISTER,Jenny,Australian Labor Party,0.500643124372926,2,Elected,
 N,3,O'NEILL,Deborah,Australian Labor Party,0.25143666907441,4,Elected,
 N,4,CAMERON,Doug,Australian Labor Party,0.003947786913691,6,Elected,

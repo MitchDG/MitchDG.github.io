@@ -25,7 +25,7 @@ H,2,HIGGINS,Rachael,Derryn Hinch's Justice Party,1,21,Transfer,
 I,1,WANG,Zhenya Dio,Palmer United Party,1,60,Transfer,
 I,2,KRUGER,Jacque,Palmer United Party,1,11,Transfer,
 J,1,LUDLAM,Scott,The Greens (WA),0.260328833457678,0,Elected_Left,"Although elected in 2016, Scott LUDLUM was disqualified due to foreign citizenship. He was replaced by Jordon STEELE-JOHN."
-J,2,SIEWERT,Rachel,The Greens (WA),0,500,Final,
+J,2,SIEWERT,Rachel,The Greens (WA),0,500,Final_Left,Rachel SIEWERT resigned from the Senate on 6 September 2021. Dorinda COX was appointed to fill the vacancy on 14 September 2021.
 J,3,STEELE-JOHN,Jordon,The Greens (WA),1,32,Transfer_Appointed,"Although not elected in 2016, Jordon STEELE-JOHN replaced Scott LUDLUM after he was disqualified due to foreign citizenship."
 J,4,JENKINSON,Samantha,The Greens (WA),1,45,Transfer,
 J,5,BALDOCK,Michael,The Greens (WA),1,31,Transfer,
@@ -57,11 +57,11 @@ V,1,PAULL,Stuey,,1,46,Transfer,
 V,2,MORRIS,Gary J,,1,27,Transfer,
 W,1,CAMERON,Lindsay,Australian Christians,1,70,Transfer,
 W,2,YOUNG,Jacky,Australian Christians,1,29,Transfer,
-X,1,CORMANN,Mathias,Liberals,0.798498676995053,0,Elected,
+X,1,CORMANN,Mathias,Liberals,0.798498676995053,0,Elected_Left,Mathias CORMANN resigned from the Senate on 6 November 2020 to nominate for the position of Secretary-General of the OECD. Ben SMALL was appointed to fill the vacancy on 25 November 2020. Ben SMALL resigned on 15 April 2022 after discovering he was a citizen of New Zealand and ineligible to be a senator. He was nominated to replace himself on 18 May 2022.
 X,2,CASH,Michaelia,Liberals,0.597143323695812,1,Elected,
 X,3,SMITH,Dean,Liberals,0.395544295420793,3,Elected,
 X,4,REYNOLDS,Linda,Liberals,0.19478892213555,5,Elected,
-X,5,BACK,Chris,Liberals,2.0983516493E-05,57,Elected_Left,"Although elected in 2016, Chris BACK resigned from parliament. He was replaced by Slade BROCKMAN."
+X,5,BACK,Chris,Liberals,0.000020983516493,57,Elected_Left,"Although elected in 2016, Chris BACK resigned from parliament. He was replaced by Slade BROCKMAN."
 X,6,JOHNSTON,David,Liberals,1,49,Transfer,
 X,7,INGRAM,Sheridan,Liberals,1,43,Transfer,
 Y,1,VICKERY,Lyn,Australia First Party,1,55,Transfer,

@@ -8,7 +8,7 @@ C,2,EDGECOMBE,Jacqueline,Animal Justice Party,1,69,Transfer,
 D,1,CARR,Kim,Australian Labor Party,0.747152471989564,0,Elected,
 D,2,CONROY,Stephen Michael,Australian Labor Party,0.493369582890612,2,Elected,
 D,3,COLLINS,Jacinta,Australian Labor Party,0.24124416356176,4,Elected_Left,"Although elected in 2016, Jacinta COLLINS resigned from parliament. She was replaced by Raff CICCONE."
-D,4,MARSHALL,Gavin,Australian Labor Party,0.001236169941228,96,Elected_Left,"Although elected in 2016, Stephen CONROY resigned from parliament. He was replaced by Kimberley KITCHING."
+D,4,MARSHALL,Gavin,Australian Labor Party,0.001236169941228,96,Elected_Left,"Although elected in 2016, Stephen CONROY resigned from parliament. He was replaced by Kimberley KITCHING. Kimberley KITCHING died on 10 March 2022. Jana Stewart was appointed to fill the vacancy on 6 April 2022."
 D,5,YANG,Chien-Hui,Australian Labor Party,1,80,Transfer,
 D,6,PERSSE,Louise,Australian Labor Party,1,71,Transfer,
 D,7,KENT,Steve,Australian Labor Party,1,72,Transfer,
@@ -70,9 +70,9 @@ AD,1,SCANLON,David James,Voluntary Euthanasia Party,1,85,Transfer,
 AD,2,JONES,Miranda,Voluntary Euthanasia Party,1,23,Transfer,
 AE,1,McCARTHY,Graham,Mature Australia,1,82,Transfer,
 AE,2,RIDGE,Roy,Mature Australia,1,8,Transfer,
-AF,1,FIFIELD,Mitch,Liberals,0.766050621692776,0,Elected,
+AF,1,FIFIELD,Mitch,Liberals,0.766050621692776,0,Elected_Left,Mitch FIFIELD resigned from the Senate on 16 August 2019 to become Permanent Representative of Australia to the United Nations. Sarah HENDERSON was appointed to fill the vacancy on 11 September 2019.
 AF,2,McKENZIE,Bridget,The Nationals,0.531838447759632,1,Elected,
-AF,3,RYAN,Scott,Liberals,0.298375924215021,3,Elected,
+AF,3,RYAN,Scott,Liberals,0.298375924215021,3,Elected_Left,Scott RYAN resigned from the Senate on 13 October 2021. Greg MIRABELLA was appointed to fill the vacancy on 2 December 2021.
 AF,4,PATERSON,James,Liberals,0.065128637610171,5,Elected,
 AF,5,HUME,Jane,Liberals,0,1000,Final,
 AF,6,OKOTEL,Karina,Liberals,1,70,Transfer,
@@ -85,7 +85,7 @@ AI,1,NALLIAH,Daniel,Rise Up Australia Party,1,90,Transfer,
 AI,2,CRESTANI,Rosalie,Rise Up Australia Party,1,15,Transfer,
 AJ,1,KNIGHT,David,Australian Progressives,1,76,Transfer,
 AJ,2,GILMORE,Josh,Australian Progressives,1,19,Transfer,
-AK,1,DI NATALE,Richard,The Greens,0.283785760836314,0,Elected,
+AK,1,DI NATALE,Richard,The Greens,0.283785760836314,0,Elected_Left,Richard DI NATALE resigned from the Senate on 26 August 2020. Lidia THORPE was appointed to fill the vacancy on 4 September 2020.
 AK,2,RICE,Janet,The Greens,0.009908066083914,112,Elected,
 AK,3,COLEMAN,Misha,The Greens,1,65,Transfer,
 AK,4,KLEIN,Elise,The Greens,1,60,Transfer,

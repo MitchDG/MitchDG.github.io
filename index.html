@@ -7,7 +7,7 @@
    <script src = "https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
-<font size="5"><div id="myTitle"> Where did my vote go in the Australian 2019 Federal Election?</div></font>
+<font size="5"><div id="myTitle"> Where did my vote go in the Australian 2022 Federal Election?</div></font>
 
 
 <button type="button" onclick="state = 'NSW'; DisplayBallot()">NSW</button>
@@ -21,7 +21,9 @@
 &nbsp &nbsp &nbsp &nbsp
 <button type="button" onclick="FlowPreferences()">VOTE!</button>
 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-<button onclick="myFunction()"><div id="myYearButton">Switch to 2016</div></button>
+<button onclick="myFunction2019()"><div id="myYear2019Button">Switch to 2019</div></button>
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+<button onclick="myFunction2016()"><div id="myYear2016Button">Switch to 2016</div></button>
 
 <style type="text/css">input[type="number"] {width:40px;}</style>
 
@@ -36,14 +38,14 @@
   <tr><td><p id="demo"></p></td><td><p id="output"></p></td></tr></table>
 
 <form id="BALLOT">
-<p id="question"> The way that preferences flow in the Australian senate can be confusing. This tool shows you where your vote would have flowed in the 2019 (or 2016) senate election.
+<p id="question"> The way that preferences flow in the Australian senate can be confusing. This tool shows you where your vote would have flowed in the 2022 (or 2019 or 2016) senate election.
 <br>
 <br> <b> THIS TOOL SHOULD NOT BE USED TO PREDICT WHERE PREFERENCES WILL FLOW IN FUTURE FEDERAL ELECTIONS! </b>
 <br>
 <br> Where a vote flows depends on all the other votes cast in that election, so it is imposible to tell exactly where a vote in a future election will end up before the votes are counted.
 <br> The best way to ensure your vote goes where you want it to is to make sure you indicate those preferences on your ballot, either above or below the line. By leaving boxes empty, you are effectively ranking the unnumbered parties equal last.
 <br>
-<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it were cast in the 2019 (or 2016) Federal election.
+<br> Select a state, enter your preferences, and then press the VOTE! button to see where that vote would have gone if it were cast in the 2022 (or 2019 or 2016) Federal election.
 <br>
 <br> To be clear, you don't have to remember your vote from last election in order for this tool to be useful. the idea is to enter a vote that you might have made, and see how things would have changed if you switched some preferences, or added some more.
 <!-- I am from Queensland, where our state parliament is unicameral (we don't have a state senate). If this site is popular, I might consider adapting it to state senates also. -->
@@ -57,17 +59,39 @@ function sortNumber(a,b) {
 }
 
 
-function myFunction() {
-  var x = document.getElementById("myYearButton");
+function myFunction2016() {
+  var x = document.getElementById("myYear2016Button");
+  var z = document.getElementById("myYear2019Button");
   var y = document.getElementById("myTitle");
   if (x.innerHTML === "Switch to 2016") {
-    x.innerHTML = "Switch to 2019";
+    x.innerHTML = "Switch to 2022";
     y.innerHTML = "Where did my vote go in the Australian 2016 Federal Election?";
+    if (z.innerHTML === "Switch to 2022") {
+      z.innerHTML = "Switch to 2019";
+    }
   } else {
     x.innerHTML = "Switch to 2016";
+    y.innerHTML = "Where did my vote go in the Australian 2022 Federal Election?";
+  }
+
+}
+
+function myFunction2019() {
+  var x = document.getElementById("myYear2019Button");
+  var z = document.getElementById("myYear2016Button");
+  var y = document.getElementById("myTitle");
+  if (x.innerHTML === "Switch to 2019") {
+    x.innerHTML = "Switch to 2022";
     y.innerHTML = "Where did my vote go in the Australian 2019 Federal Election?";
+    if (z.innerHTML === "Switch to 2022") {
+      z.innerHTML = "Switch to 2016";
+    }
+  } else {
+    x.innerHTML = "Switch to 2019";
+    y.innerHTML = "Where did my vote go in the Australian 2022 Federal Election?";
   }
 }
+
 
 /*####################
 ### Ballot Display ###
@@ -75,8 +99,13 @@ function myFunction() {
 
 function DisplayBallot() {
   var statedict = {"ACT":"Australian Capital Territory", "NSW":"New South Wales", "NT":"Northern Territory", "QLD":"Queensland", "SA":"South Australia", "TAS":"Tasmania", "VIC":"Victoria", "WA":"Western Australia"};
-  var yearButton = document.getElementById("myYearButton");
-  if (yearButton.innerHTML === "Switch to 2016") {
+  var yearButton2016 = document.getElementById("myYear2016Button");  
+  var yearButton2019 = document.getElementById("myYear2019Button");
+  if (yearButton2016.innerHTML === "Switch to 2016" && yearButton2019.innerHTML === "Switch to 2019") {
+    var year = "2022";
+    var defaultmaxposition = 6;
+
+  } else if (yearButton2016.innerHTML === "Switch to 2016" && yearButton2019.innerHTML === "Switch to 2022") {
     var year = "2019";
     var defaultmaxposition = 6;
 
@@ -90,7 +119,7 @@ function DisplayBallot() {
   if (year == "2016") {
     document.getElementById("question").innerHTML += ", <font color=\"red\">candidates in red</font> were elected but did not finish their term, and <font color = \"green\">candidates in green</font> were not elected in 2016, but were subsequently appointed to parliament before the 2019 election. <br> Also note that the 2016 Federal election was a double dissolution election, which means 12 candidates were elected in each state, and 2 in each territory.";
   } else {
-    document.getElementById("question").innerHTML += " and are still in parliament. <br> The 2019 federal election was a normal half senate election, which means 6 candidates were elected in each state, and 2 in each territory.";
+    document.getElementById("question").innerHTML += " and are still in parliament. <br> The " + year + " federal election was a normal half senate election, which means 6 candidates were elected in each state, and 2 in each territory.";
   }
   document.getElementById("demo").innerHTML = "<br>";
   d3.csv("./data/" + year + "/" + state + ".csv", function(data) {
@@ -171,11 +200,15 @@ function DisplayBallot() {
 
 function FlowPreferences() {
 console.log("***");
-var yearButton = document.getElementById("myYearButton");
-if (yearButton.innerHTML === "Switch to 2016") {
+var yearButton2016 = document.getElementById("myYear2016Button");
+var yearButton2019 = document.getElementById("myYear2019Button");
+if (yearButton2016.innerHTML === "Switch to 2016" && yearButton2019.innerHTML === "Switch to 2019") {
+  var year = "2022";
+} else { if (yearButton2016.innerHTML === "Switch to 2016" && yearButton2019.innerHTML === "Switch to 2022") { 
   var year = "2019";
 } else {
   var year = "2016";
+}
 }
 
 document.getElementById("demo").innerHTML="";
